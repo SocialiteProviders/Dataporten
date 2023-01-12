@@ -41,13 +41,13 @@ You should now be able to use the provider like you would regularly use Socialit
 return Socialite::driver('dataporten')->redirect();
 ```
 
-End session with your application AND dataporten example.
+End session for application AND dataporten example.
 
 ```php
-$IdToken = auth()->user()->dataporten_id_token;
+$idToken = auth()->user()->dataporten_id_token;
 $endpointUri = env('DATAPORTEN_ENDSESSION_ENDPOINT');
 $redirectUri = env('DATAPORTEN_LOGOUT_REDIRECT_URI');
-$logout_uri = Socialite::driver('dataporten')->getLogoutUrl($IdToken, $endpointUri, $redirectUri);
+$logoutUri = Socialite::driver('dataporten')->getLogoutUrl($idToken, $endpointUri, $redirectUri);
 
 Auth::guard('web')->logout();
 
@@ -55,8 +55,8 @@ $request->session()->invalidate();
 
 $request->session()->regenerateToken();
 
-if($IdToken) {
-    return redirect()->away($logout_uri);
+if($idToken) {
+    return redirect()->away($logoutUri);
 }
 
 return redirect('/');
