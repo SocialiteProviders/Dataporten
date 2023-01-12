@@ -44,7 +44,7 @@ return Socialite::driver('dataporten')->redirect();
 End session with your application AND dataporten example.
 
 ```php
-$IdToken = auth()->user()->feide_id_token;
+$IdToken = auth()->user()->dataporten_id_token;
 $endpointUri = env('DATAPORTEN_ENDSESSION_ENDPOINT');
 $redirectUri = env('DATAPORTEN_LOGOUT_REDIRECT_URI');
 $logout_uri = Socialite::driver('dataporten')->getLogoutUrl($IdToken, $endpointUri, $redirectUri);
