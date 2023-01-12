@@ -45,9 +45,6 @@ End session for application AND dataporten example.
 
 ```php
 $idToken = auth()->user()->dataporten_id_token;
-$endpointUri = env('DATAPORTEN_ENDSESSION_ENDPOINT');
-$redirectUri = env('DATAPORTEN_LOGOUT_REDIRECT_URI');
-$logoutUri = Socialite::driver('dataporten')->getLogoutUrl($idToken, $endpointUri, $redirectUri);
 
 Auth::guard('web')->logout();
 
@@ -56,6 +53,9 @@ $request->session()->invalidate();
 $request->session()->regenerateToken();
 
 if($idToken) {
+    $endpointUri = env('DATAPORTEN_ENDSESSION_ENDPOINT');
+    $redirectUri = env('DATAPORTEN_LOGOUT_REDIRECT_URI');
+    $logoutUri = Socialite::driver('dataporten')->getLogoutUrl($idToken, $endpointUri, $redirectUri);
     return redirect()->away($logoutUri);
 }
 
